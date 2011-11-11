@@ -1,0 +1,14 @@
+jQuery plugin for instrumenting ajax requests with New Relic Real User Monitoring
+
+In order for this plugin to work you will first need to have the page that includes this plugin being instrumented by the New Relic RUM headers and footers, see http://newrelic.com/docs/features/how-does-real-user-monitoring-work for more details.
+
+To instrument your ajax requests just include the jquery.newrelic.js script in the page.  All requests will then be tracked for network time and parsing time.
+
+If you have a number of similar requests that you want to aggregate the timings for then you can add simple mappings by:
+jQuery.newrelic.addRequestMapping(mapping);
+
+Where mapping can contain *'s that match any sequence of characters in the request URL not including /'s.  For example:
+/item/* - will match /item/1.json, /item/2.json etc.
+/item/*/reviews - will match /item/1/reviews, /item/2/reviews etc.
+
+All the matched requests will be reported to New Relic as e.g. /item/*/reviews
